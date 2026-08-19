@@ -34,6 +34,10 @@
 #define CPUINFO_ARCH_PPC64 1
 #endif
 
+#if defined(__loongarch64) || defined(__loongarch__)
+#define CPUINFO_ARCH_LOONGARCH64 1
+#endif
+
 #if defined(__asmjs__)
 #define CPUINFO_ARCH_ASMJS 1
 #endif
@@ -74,6 +78,10 @@
 
 #ifndef CPUINFO_ARCH_PPC64
 #define CPUINFO_ARCH_PPC64 0
+#endif
+
+#ifndef CPUINFO_ARCH_LOONGARCH64
+#define CPUINFO_ARCH_LOONGARCH64 0
 #endif
 
 #ifndef CPUINFO_ARCH_ASMJS
@@ -304,6 +312,9 @@ enum cpuinfo_vendor {
 	 * in 1997.
 	 */
 	cpuinfo_vendor_dec = 57,
+
+	/** Loongson. */
+	cpuinfo_vendor_loongson = 58,
 };
 
 /**
@@ -671,6 +682,9 @@ enum cpuinfo_uarch {
 
 	/** HiSilicon TaiShan v110 (Huawei Kunpeng 920 series processors). */
 	cpuinfo_uarch_taishan_v110 = 0x00C00100,
+
+	/** Loongson 3A6000 / LA684 microarchitecture. */
+	cpuinfo_uarch_loongson_3a6000 = 0x00D00100,
 };
 
 struct cpuinfo_processor {

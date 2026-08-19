@@ -9,6 +9,8 @@ static const char* vendor_to_string(enum cpuinfo_vendor vendor) {
 	switch (vendor) {
 		case cpuinfo_vendor_unknown:
 			return "unknown";
+		case cpuinfo_vendor_loongson:
+			return "Loongson";
 		case cpuinfo_vendor_intel:
 			return "Intel";
 		case cpuinfo_vendor_amd:
@@ -357,6 +359,8 @@ static const char* uarch_to_string(enum cpuinfo_uarch uarch) {
 			return "Dhyana";
 		case cpuinfo_uarch_taishan_v110:
 			return "TaiShan v110";
+		case cpuinfo_uarch_loongson_3a6000:
+			return "Loongson 3A6000";
 		default:
 			return NULL;
 	}

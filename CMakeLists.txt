@@ -95,7 +95,7 @@ IF(NOT CMAKE_SYSTEM_PROCESSOR)
       "cpuinfo will compile, but cpuinfo_initialize() will always fail.")
     SET(CPUINFO_SUPPORTED_PLATFORM FALSE)
   ENDIF()
-ELSEIF(NOT CPUINFO_TARGET_PROCESSOR MATCHES "^(i[3-6]86|AMD64|x86(_64)?|armv[5-8].*|aarch64|arm64.*|ARM64.*|riscv(32|64))$")
+ELSEIF(NOT CPUINFO_TARGET_PROCESSOR MATCHES "^(i[3-6]86|AMD64|x86(_64)?|armv[5-8].*|aarch64|arm64.*|ARM64.*|riscv(32|64)|loongarch64)$")
   MESSAGE(WARNING
     "Target processor architecture \"${CPUINFO_TARGET_PROCESSOR}\" is not supported in cpuinfo. "
     "cpuinfo will compile, but cpuinfo_initialize() will always fail.")
@@ -224,6 +224,11 @@ IF(CPUINFO_SUPPORTED_PLATFORM)
         src/riscv/linux/init.c
 	src/riscv/linux/riscv-hw.c
 	src/riscv/linux/riscv-isa.c)
+    ENDIF()
+  ELSEIF(CPUINFO_TARGET_PROCESSOR STREQUAL "loongarch64")
+    IF(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Android")
+      LIST(APPEND CPUINFO_SRCS
+        src/loongarch/linux/init.c)
     ENDIF()
   ENDIF()
 
