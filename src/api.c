@@ -38,6 +38,9 @@ uint32_t cpuinfo_max_cache_size = 0;
 #if CPUINFO_ARCH_ARM || CPUINFO_ARCH_ARM64 || CPUINFO_ARCH_RISCV32 || CPUINFO_ARCH_RISCV64 || CPUINFO_ARCH_LOONGARCH64
 struct cpuinfo_uarch_info* cpuinfo_uarchs = NULL;
 uint32_t cpuinfo_uarchs_count = 0;
+#if CPUINFO_ARCH_LOONGARCH64
+struct cpuinfo_loongarch_isa cpuinfo_isa = {false, false};
+#endif
 #else
 struct cpuinfo_uarch_info cpuinfo_global_uarch = {cpuinfo_uarch_unknown};
 #endif

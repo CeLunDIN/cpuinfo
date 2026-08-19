@@ -104,6 +104,15 @@
 #define CPUINFO_ARCH_RISCV64 0
 #endif
 
+#if CPUINFO_ARCH_LOONGARCH64
+struct cpuinfo_loongarch_isa {
+	bool lsx;
+	bool lasx;
+};
+
+extern struct cpuinfo_loongarch_isa cpuinfo_isa;
+#endif
+
 #if CPUINFO_ARCH_X86 && defined(_MSC_VER)
 #define CPUINFO_ABI __cdecl
 #elif CPUINFO_ARCH_X86 && defined(__GNUC__)
@@ -2387,6 +2396,22 @@ static inline bool cpuinfo_has_riscv_zfh(void) {
 static inline bool cpuinfo_has_riscv_zvfh(void) {
 #if CPUINFO_ARCH_RISCV32 || CPUINFO_ARCH_RISCV64
 	return cpuinfo_isa.zvfh;
+#else
+	return false;
+#endif
+}
+
+static inline bool cpuinfo_has_loongarch_lsx(void) {
+#if CPUINFO_ARCH_LOONGARCH64
+	return cpuinfo_isa.lsx;
+#else
+	return false;
+#endif
+}
+
+static inline bool cpuinfo_has_loongarch_lasx(void) {
+#if CPUINFO_ARCH_LOONGARCH64
+	return cpuinfo_isa.lasx;
 #else
 	return false;
 #endif
